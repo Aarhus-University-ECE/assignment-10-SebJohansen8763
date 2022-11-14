@@ -45,16 +45,22 @@ int sum_squares(node *p) {
 typedef int (*fn_int_to_int)(int);
 
 node *map(node *p, fn_int_to_int f) { 
-  // Add your code for excercise 3
+    node *temp = malloc(sizeof(node));
+  if (p == NULL) {
+    return NULL; //returns NULL, as the new list also needs a null pointer in the end. 
+  }
+  else {
+    temp->value = f(p->value); //make temps value p->value squared
+    temp->next = map(p->next,f); //make connection, and send p and function
+    return temp; //return pointer for every function call
+  }
   
   return NULL; 
 }
 
-int square(int x) { return x * x; }
-
-// example of another function that can be passed to map
-// returns the sign of the number
-// -1 if negative, 0 if zero, 1 if positive
-int sign(int x) { return x == 0 ? 0 : (x < 0 ? -1 : 1); }
+int square(int x)
+{
+  return x * x;
+}
 
  
